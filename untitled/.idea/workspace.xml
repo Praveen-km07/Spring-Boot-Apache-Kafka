@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="da45a418-9c3f-4a51-916f-de8ac59a5067" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../springboot-kafka-real-world-project/kafka-producer-wikimedia/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../springboot-kafka-real-world-project/kafka-producer-wikimedia/src/main/java/com/testingudemyprojects/springboot/KafkaTopicConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../springboot-kafka-real-world-project/kafka-producer-wikimedia/src/main/java/com/testingudemyprojects/springboot/SpringBootProducerApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../springboot-kafka-real-world-project/kafka-producer-wikimedia/src/main/java/com/testingudemyprojects/springboot/WikimediaChangesHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../springboot-kafka-real-world-project/kafka-producer-wikimedia/src/main/java/com/testingudemyprojects/springboot/WikimediaChangesProducer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../springboot-kafka-real-world-project/kafka-producer-wikimedia/src/main/resources/application.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="2gPEwna1sxjHXrSKgL2G8PsvgDu" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Kotlin Progrmming" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Kotlin Progrmming" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="da45a418-9c3f-4a51-916f-de8ac59a5067" name="Changes" comment="" />
+      <created>1715591060168</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1715591060168</updated>
+      <workItem from="1715591061066" duration="177000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
