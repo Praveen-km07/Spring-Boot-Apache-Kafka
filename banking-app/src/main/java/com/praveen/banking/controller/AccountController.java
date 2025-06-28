@@ -1,6 +1,7 @@
 package com.praveen.banking.controller;
 
 import com.praveen.banking.dto.AccountDto;
+import com.praveen.banking.dto.TransferFundDto;
 import com.praveen.banking.service.AccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -60,5 +61,12 @@ public class AccountController {
     public ResponseEntity<String> deleteAccount(@PathVariable Long id){
         accountService.deleteAccount(id);
         return ResponseEntity.ok("Account is Deleted successfully");
+    }
+
+    //Build transfer REST aPI
+    @PostMapping("/transfer")
+    public ResponseEntity<String> transferFund(@RequestBody TransferFundDto transferFundDto){
+        accountService.transferFunds(transferFundDto);
+        return ResponseEntity.ok("Transfer Successful");
     }
 }
