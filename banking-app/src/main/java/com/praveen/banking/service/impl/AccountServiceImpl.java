@@ -1,6 +1,7 @@
 package com.praveen.banking.service.impl;
 
 import com.praveen.banking.dto.AccountDto;
+import com.praveen.banking.dto.TransferFundDto;
 import com.praveen.banking.entity.Account;
 import com.praveen.banking.exception.AccountException;
 import com.praveen.banking.mapper.AccountMapper;
@@ -69,6 +70,27 @@ public class AccountServiceImpl implements AccountService {
     public void deleteAccount(Long id) {
         Account account = accountRepository.findById(id).orElseThrow(()->new AccountException("Account does not exists"));
         accountRepository.deleteById(id);
+    }
+
+    /**
+     * @param transferFundDto
+     */
+    @Override
+    public void transferFunds(TransferFundDto transferFundDto) {
+        //Retrieve the account from which we send the amount
+        Account fromAccount =accountRepository.findById(transferFundDto.fromAccountId()).orElseThrow(()->new AccountException("Account does not exists"));
+
+        //Retrieve the account to which we send the amount
+        Account toAccount = accountRepository.findById(transferFundDto.toAccountId()).orElseThrow(()->new AccountException("Account Does not exists"));
+
+        //Debit the amount from fromAccount object
+        fromAccount.setBalance(fromAccount.getBalance() - transferFundDto.amount());
+
+        //Credit the amount from toAccount object
+        toAccount.setBalance(toAccount.getBalance()+ transferFundDto.amount());
+
+        accountRepository.save(fromAccount);
+        accountRepository.save(toAccount);
     }
 
 
