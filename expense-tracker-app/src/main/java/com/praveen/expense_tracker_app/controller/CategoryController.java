@@ -15,7 +15,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/category")
-@Tag(name="Expense-Tracker-App",description = "Operation Related to Expense Tracking")
+@Tag(name="Expense-Tracker-App",description = "Operation Related to Category")
 public class CategoryController {
 
     private CategoryService categoryService;
