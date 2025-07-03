@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+@Tag(name="CRUD REST APIs for Category Resource",description = "CRUD REST APIs for Category Resource -Create Category"+
+"Update Category,Get Category and Delete Category")
 @RestController
 @RequestMapping("/api/category")
-@Tag(name="Expense-Tracker-App",description = "Operation Related to Category")
+
 public class CategoryController {
 
     private CategoryService categoryService;

@@ -11,11 +11,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@Tag(name="CRUD REST APIs for Expense Resource",description = "CRUD REST APIs for Expense Resource -Create Expense"+
+        "Update expense,Get expense and Delete expense")
 @RestController
 @RequestMapping("/api/expenses")
 @AllArgsConstructor
-@Tag(name="Expense-Tracker-App",description = "Operations related to Expenses")
+
 public class ExpenseController {
 
     //inject the expenseService using constructor based DI
@@ -23,7 +24,7 @@ public class ExpenseController {
 
     //Build create expnse api
     @PostMapping
-    @Operation(summary = "Creating the Expense",responses = {
+    @Operation(summary = "Creating the Expense",description = "Creating the Expenses",responses = {
             @ApiResponse(responseCode = "200",description = "creation of expenses successful"),
             @ApiResponse(responseCode = "201",description = "creation of expenses successful"),
             @ApiResponse(responseCode = "400",description = "creation of expense unsuccessful")
