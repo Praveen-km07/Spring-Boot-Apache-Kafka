@@ -3,6 +3,7 @@ package com.praveen.expense_tracker_app.service.impl;
 import com.praveen.expense_tracker_app.dto.CategoryDto;
 import com.praveen.expense_tracker_app.dto.ExpenseDto;
 import com.praveen.expense_tracker_app.entity.Category;
+import com.praveen.expense_tracker_app.exception.ResourceNotFoundException;
 import com.praveen.expense_tracker_app.mapper.CategoryMapper;
 import com.praveen.expense_tracker_app.repository.CategoryRepository;
 import com.praveen.expense_tracker_app.service.CategoryService;
@@ -40,7 +41,7 @@ public class CategoryServiceImpl implements CategoryService {
      */
     @Override
     public CategoryDto getCategoryById(Long id) {
-        Category category = categoryRepository.findById(id).orElseThrow(()->new RuntimeException("Category does not exists with id : "+id));
+        Category category = categoryRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Category does not exists with id : "+id));
         return CategoryMapper.mapToCategoryDto(category);
     }
 
@@ -62,7 +63,7 @@ public class CategoryServiceImpl implements CategoryService {
      */
     @Override
     public CategoryDto updateCategory(Long id, String categoryName) {
-        Category category=categoryRepository.findById(id).orElseThrow(()->new RuntimeException("Category ID doesnot exists with ID : "+id));
+        Category category=categoryRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Category ID doesnot exists with ID : "+id));
         category.setCategoryName(categoryName);
         Category savedCategory = categoryRepository.save(category);
         return CategoryMapper.mapToCategoryDto(savedCategory);
@@ -73,7 +74,7 @@ public class CategoryServiceImpl implements CategoryService {
      */
     @Override
     public void deleteCategory(Long id) {
-        Category category = categoryRepository.findById(id).orElseThrow(()->new RuntimeException("Category ID does not exisits"));
+        Category category = categoryRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Category ID does not exisits"));
         categoryRepository.delete(category);
     }
 

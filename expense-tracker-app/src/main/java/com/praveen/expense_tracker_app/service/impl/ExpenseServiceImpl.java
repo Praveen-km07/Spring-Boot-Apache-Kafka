@@ -3,6 +3,7 @@ package com.praveen.expense_tracker_app.service.impl;
 import com.praveen.expense_tracker_app.dto.ExpenseDto;
 import com.praveen.expense_tracker_app.entity.Category;
 import com.praveen.expense_tracker_app.entity.Expense;
+import com.praveen.expense_tracker_app.exception.ResourceNotFoundException;
 import com.praveen.expense_tracker_app.mapper.ExpensesMapper;
 import com.praveen.expense_tracker_app.repository.CategoryRepository;
 import com.praveen.expense_tracker_app.repository.ExpensesRepository;
@@ -42,7 +43,7 @@ public class ExpenseServiceImpl implements ExpenseService {
      */
     @Override
     public ExpenseDto getExpenseById(Long id) {
-        Expense expense = expensesRepository.findById(id).orElseThrow(()->new RuntimeException("Expense Does not exists with id : " +id));
+        Expense expense = expensesRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Expense Does not exists with id : " +id));
         return ExpensesMapper.mapToExpenseDto(expense);
     }
 
@@ -62,11 +63,11 @@ public class ExpenseServiceImpl implements ExpenseService {
      */
     @Override
     public ExpenseDto updateExpense(Long expenseId, ExpenseDto expenseDto) {
-        Expense expense =expensesRepository.findById(expenseId).orElseThrow(()->new RuntimeException("Expense  not found with id : "+expenseId));
+        Expense expense =expensesRepository.findById(expenseId).orElseThrow(()->new ResourceNotFoundException("Expense  not found with id : "+expenseId));
         expense.setAmount(expenseDto.amount());
         expense.setExpenseTimestamp(expenseDto.expenseTimestamp());
         if(expenseDto.categoryDto() !=null){
-           Category category = categoryRepository.findById(expenseDto.categoryDto().id()).orElseThrow(()->new RuntimeException("Expense not found with id :" +expenseDto.categoryDto().id()));
+           Category category = categoryRepository.findById(expenseDto.categoryDto().id()).orElseThrow(()->new ResourceNotFoundException("Expense not found with id :" +expenseDto.categoryDto().id()));
               expense.setCategory(category);
         }
         //update expense entity
@@ -80,7 +81,7 @@ public class ExpenseServiceImpl implements ExpenseService {
      */
     @Override
     public void deleteExpense(Long id) {
-        Expense expense = expensesRepository.findById(id).orElseThrow(()->new RuntimeException("Expense does not exists with id :" +id));
+        Expense expense = expensesRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Expense does not exists with id :" +id));
         expensesRepository.delete(expense);
     }
 }
