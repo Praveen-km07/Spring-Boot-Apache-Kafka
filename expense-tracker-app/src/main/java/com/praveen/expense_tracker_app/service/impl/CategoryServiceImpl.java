@@ -1,11 +1,13 @@
 package com.praveen.expense_tracker_app.service.impl;
 
 import com.praveen.expense_tracker_app.dto.CategoryDto;
+import com.praveen.expense_tracker_app.dto.ExpenseDto;
 import com.praveen.expense_tracker_app.entity.Category;
 import com.praveen.expense_tracker_app.mapper.CategoryMapper;
 import com.praveen.expense_tracker_app.repository.CategoryRepository;
 import com.praveen.expense_tracker_app.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -74,4 +76,6 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = categoryRepository.findById(id).orElseThrow(()->new RuntimeException("Category ID does not exisits"));
         categoryRepository.delete(category);
     }
+
+
 }
