@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,6 +28,8 @@ public class TodoController {
             @ApiResponse(responseCode = "201",description = "Creation of todo is successful"),
             @ApiResponse(responseCode = "500",description = "Creation of todo is unsuccessful")
     })
+
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<TodoDto> createTodos(@RequestBody TodoDto todoDto){
         System.out.println("Incoming DTO: " + todoDto);
@@ -34,6 +37,7 @@ public class TodoController {
     }
 
     @Operation(summary="Get todo by id",description = "Fetching specific todos by ID")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @GetMapping("/{id}")
     public ResponseEntity<TodoDto> getTodoById(@PathVariable Long id){
          TodoDto todoDto = todoService.getTodoById(id);
@@ -41,6 +45,7 @@ public class TodoController {
     }
 
     @Operation(summary = "Get All Todos",description = "Fetching all the todos")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @GetMapping
     public ResponseEntity<List<TodoDto>> getAllTodos(){
         List<TodoDto> todoDtoList = todoService.getAllTodos();
@@ -51,6 +56,7 @@ public class TodoController {
             @ApiResponse(responseCode = "200",description = "Updation of todo is successfull"),
             @ApiResponse(responseCode = "500",description = "Updation of todo is unsuccessfull")
     })
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<TodoDto> updateTodoByIdService(@PathVariable Long id,@RequestBody TodoDto todoDto){
          TodoDto updatedTodo=todoService.updateTodoById(todoDto,id);
@@ -61,6 +67,7 @@ public class TodoController {
             @ApiResponse(responseCode = "200",description = "Deletion of todos is successful"),
             @ApiResponse(responseCode = "500",description = "Deletion of todos is unsuccessful")
     })
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
    public ResponseEntity<String> deleteTodo(@PathVariable Long id){
              todoService.deleteTodo(id);
@@ -72,6 +79,7 @@ public class TodoController {
            @ApiResponse(responseCode = "500",description = "updation is unsuccessful")
    })
    @PatchMapping("/{id}/complete")
+   @PreAuthorize("hasAnyRole('ADMIN','USER')")
    public ResponseEntity<TodoDto> updatedCompleteTodos(@PathVariable Long id){
           TodoDto tododto=todoService.completeTodo(id);
           return ResponseEntity.ok(tododto);
@@ -81,6 +89,7 @@ public class TodoController {
            @ApiResponse(responseCode = "200",description = "Updation is successfull"),
            @ApiResponse(responseCode = "500",description = "Updation is unsuccessfull")
    })
+   @PreAuthorize("hasAnyRole('ADMIN','USER')")
    @PatchMapping("/{id}/incomplete")
    public ResponseEntity<TodoDto> incompleteTodos(@PathVariable Long id){
         TodoDto todoDto = todoService.inCompleteTodo(id);

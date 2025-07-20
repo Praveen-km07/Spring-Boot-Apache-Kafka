@@ -23,6 +23,17 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorDetails,HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(TodoAPIException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorDetails> handleTodoAPIException(TodoAPIException exception,WebRequest webRequest){
+        ErrorDetails errorDetails = new ErrorDetails();
+        errorDetails.setMessage(exception.getMessage());
+        errorDetails.setErrorCode("USER ALREADY EXISTS");
+        errorDetails.setDetails(webRequest.getDescription(false));
+        errorDetails.setErrorTimestamp(LocalDateTime.now());
+        return new ResponseEntity<>(errorDetails,HttpStatus.BAD_REQUEST);
+    }
+
      @ExceptionHandler(Exception.class)
      @ResponseStatus(value=HttpStatus.NOT_FOUND)
     public ResponseEntity<ErrorDetails> handleGenericException(RuntimeException exception,WebRequest webRequest){
