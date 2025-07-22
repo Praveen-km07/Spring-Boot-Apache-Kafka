@@ -2,6 +2,7 @@ package com.praveen.todo_management_app.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -44,4 +45,15 @@ public class GlobalExceptionHandler {
         errorDetails.setErrorTimestamp(LocalDateTime.now());
         return new ResponseEntity<>(errorDetails,HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    @ResponseStatus(value=HttpStatus.UNAUTHORIZED)
+    public ResponseEntity<ErrorDetails> handleBadCredentials(BadCredentialsException exception,WebRequest webRequest) {
+        ErrorDetails errorDetails = new ErrorDetails();
+        errorDetails.setMessage(exception.getMessage());
+        errorDetails.setDetails(webRequest.getDescription(false));
+        errorDetails.setErrorTimestamp(LocalDateTime.now());
+        return new ResponseEntity<>(errorDetails, HttpStatus.UNAUTHORIZED);
+    }
+
 }
