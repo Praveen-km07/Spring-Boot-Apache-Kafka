@@ -1,5 +1,6 @@
 package com.praveen.todo_management_app.controller;
 
+import com.praveen.todo_management_app.dto.JwtAuthResponse;
 import com.praveen.todo_management_app.dto.LoginDto;
 import com.praveen.todo_management_app.dto.RegisterDto;
 import com.praveen.todo_management_app.service.AuthService;
@@ -42,8 +43,10 @@ public class AuthController {
             @ApiResponse(responseCode = "500",description = "Unable to login")
     })
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginDto loginDto){
-        String response = authService.login(loginDto);
-        return new ResponseEntity<>(response,HttpStatus.OK);
+    public ResponseEntity<JwtAuthResponse> login(@RequestBody LoginDto loginDto){
+        String token = authService.login(loginDto);
+        JwtAuthResponse jwtAuthResponse = new JwtAuthResponse();
+        jwtAuthResponse.setAccessToken(token);
+        return new ResponseEntity<>(jwtAuthResponse,HttpStatus.OK);
     }
 }

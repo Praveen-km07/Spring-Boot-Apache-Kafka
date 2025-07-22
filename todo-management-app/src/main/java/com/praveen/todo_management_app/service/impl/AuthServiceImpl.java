@@ -7,6 +7,7 @@ import com.praveen.todo_management_app.entity.User;
 import com.praveen.todo_management_app.exception.TodoAPIException;
 import com.praveen.todo_management_app.repository.RoleRepository;
 import com.praveen.todo_management_app.repository.UserRepository;
+import com.praveen.todo_management_app.security.JwtTokenProvider;
 import com.praveen.todo_management_app.service.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,7 @@ public class AuthServiceImpl implements AuthService {
     private PasswordEncoder passwordEncoder;
 
     private AuthenticationManager authenticationManager;
+    private JwtTokenProvider jwtTokenProvider;
     /**
      * @param registerDto
      * @return
@@ -72,6 +74,8 @@ public class AuthServiceImpl implements AuthService {
                 loginDto.getPassword()
         ));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return "User logged in successfully";
+
+        String token = jwtTokenProvider.generateToken(authentication);
+        return token;
     }
 }
